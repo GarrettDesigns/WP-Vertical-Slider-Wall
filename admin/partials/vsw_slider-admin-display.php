@@ -20,6 +20,9 @@
   <h1><?php echo $this->settings_title; ?> Settings</h1>
 
   <form method="post" action="options.php">
+    <?php settings_fields( $this->plugin_name . '-settings-group' ); ?>
+    <?php do_settings_sections( $this->plugin_name . '-settings' ); ?>
+    <?php submit_button(); ?>
   </form>
 
 </div>
