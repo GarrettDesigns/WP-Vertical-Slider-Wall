@@ -62,6 +62,7 @@ class Vsw_slider_Admin {
 		$this->version = $version;
     $this->settings_title = $settings_title;
 
+
 	}
 
 	/**
@@ -132,12 +133,10 @@ class Vsw_slider_Admin {
   }
 
   public function vsw_settings_init() {
-    $plugin_settings_group = $this->plugin_name . 'settings-group';
+
     $plugin_settings = $this->plugin_name . '-settings';
 
-    $slug = 'admin.php?page=vsw-admin-menu';
-
-    register_setting( $plugin_settings_group, $plugin_settings );
+    register_setting( $plugin_settings, $plugin_settings );
 
     add_settings_section(
       'vsw_slider_one_settings_section',
@@ -145,10 +144,44 @@ class Vsw_slider_Admin {
       array( $this, 'slider_one_settings_section_callback' ),
       $plugin_settings
     );
+
+    add_settings_field(
+      'slide_image_upload',
+      'Upload Slide Data',
+      array( $this, 'generate_custom_slide_inputs' ),
+      $plugin_settings,
+      'vsw_slider_one_settings_section',
+      array( 'class' => 'widefat' )
+    );
   }
 
   public function slider_one_settings_section_callback() {
-    echo '<p>hello from the plugin</p>';
+    echo '<p>Using the input below you may assign an image, title, and link for each slide in this slider</p>';
   }
 
+  public function generate_custom_slide_inputs() {
+
+    $plugin_settings = $this->plugin_name . '-settings';
+
+    $options = get_option( $plugin_settings );
+
+    $slide_image_value = ( isset( $options["slide_image"] ) ) ? $options["slide_image"] : '';
+    $slide_title_value = ( isset( $options["slide_title"] ) ) ? $options["slide_title"] : '';
+    $slide_link_value = ( isset( $options["slide_link"] ) ) ? $options["slide_link"] : '';
+
+    $is_hidden = ( isset( $options["slide_image"] ) ) ? 'hidden' : '';
+
+      echo '<tr class="slide">';
+        echo '<td>';
+          echo '<img class="' . $is_hidden . '" src="' . $slide_image_value . '">';
+          echo '<input type="button" name="' . $plugin_settings .'[slide_image]" class="button" value="Upload Image">';
+        echo '</td>';
+        echo '<td>';
+          echo '<input type="text" name="' . $plugin_settings . '[slide_title]" class="" value="' . $slide_title_value . '">';
+        echo '</td>';
+        echo '<td>';
+          echo '<input type="text" name="' . $plugin_settings . '[slide_link]" class="" value="' . $slide_link_value . '">';
+        echo '</td>';
+      echo '</tr>';
+  }
 }
