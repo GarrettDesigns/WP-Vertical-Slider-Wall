@@ -124,7 +124,7 @@ class Vsw_slider_Admin {
       'manage_options',
       'vsw-admin-menu',
       array( $this, 'vsw_menu_page_content_callback' ),
-      'dashicons-wordpress'
+      'dashicons-images-alt2'
     );
   }
 
@@ -147,7 +147,7 @@ class Vsw_slider_Admin {
 
     add_settings_field(
       'slide_image_upload',
-      'Upload Slide Data',
+      'Slide Data',
       array( $this, 'generate_custom_slide_inputs' ),
       $plugin_settings,
       'vsw_slider_one_settings_section',
@@ -171,17 +171,47 @@ class Vsw_slider_Admin {
 
     $is_hidden = ( isset( $options["slide_image"] ) ) ? 'hidden' : '';
 
-      echo '<tr class="slide">';
-        echo '<td>';
-          echo '<img class="' . $is_hidden . '" src="' . $slide_image_value . '">';
-          echo '<input type="button" name="' . $plugin_settings .'[slide_image]" class="button" value="Upload Image">';
-        echo '</td>';
-        echo '<td>';
-          echo '<input type="text" name="' . $plugin_settings . '[slide_title]" class="" value="' . $slide_title_value . '">';
-        echo '</td>';
-        echo '<td>';
-          echo '<input type="text" name="' . $plugin_settings . '[slide_link]" class="" value="' . $slide_link_value . '">';
-        echo '</td>';
-      echo '</tr>';
+    $html = '';
+
+    $html .= '<tr class="slide">'
+    . '<td>'
+    . '<img class="' . $is_hidden . '" src="' . $slide_image_value . '">'
+    . '<input type="button" name="' . $plugin_settings .'[slide_image]" class="button" value="Upload Image">'
+    . '</td>'
+    . '<td>'
+    . '<input type="text" name="' . $plugin_settings . '[slide_title]" class="" value="' . $slide_title_value . '">'
+    . '</td>'
+    . '<td>'
+    . '<input type="text" name="' . $plugin_settings . '[slide_link]" class="" value="' . $slide_link_value . '">'
+    . '</td>'
+    . '</tr>';
+
+    $html .= '<tr class="slide">'
+    . '<td>'
+    . '<img class="' . $is_hidden . '" src="' . $slide_image_value . '">'
+    . '<input type="button" name="' . $plugin_settings .'[slide_image]" class="button" value="Upload Image">'
+    . '</td>'
+    . '<td>'
+    . '<input type="text" name="' . $plugin_settings . '[slide_title]" class="" value="' . $slide_title_value . '">'
+    . '</td>'
+    . '<td>'
+    . '<input type="text" name="' . $plugin_settings . '[slide_link]" class="" value="' . $slide_link_value . '">'
+    . '</td>'
+    . '</tr>';
+
+    $html .= '<tr class="slide">'
+    . '<td>'
+    . '<img class="' . $is_hidden . '" src="' . $slide_image_value . '">'
+    . '<input type="button" name="' . $plugin_settings .'[slide_image]" class="button" value="Upload Image">'
+    . '</td>'
+    . '<td>'
+    . '<input type="text" name="' . $plugin_settings . '[slide_title]" class="" value="' . $slide_title_value . '">'
+    . '</td>'
+    . '<td>'
+    . '<input type="text" name="' . $plugin_settings . '[slide_link]" class="" value="' . $slide_link_value . '">'
+    . '</td>'
+    . '</tr>';
+
+    echo $html;
   }
 }
