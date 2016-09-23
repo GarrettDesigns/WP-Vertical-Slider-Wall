@@ -135,18 +135,20 @@ class Vsw_slider_Admin {
     $plugin_settings_group = $this->plugin_name . 'settings-group';
     $plugin_settings = $this->plugin_name . '-settings';
 
+    $slug = 'admin.php?page=vsw-admin-menu';
+
     register_setting( $plugin_settings_group, $plugin_settings );
 
     add_settings_section(
       'vsw_slider_one_settings_section',
       'These are the settings for slider one',
       array( $this, 'slider_one_settings_section_callback' ),
-      'vsw-admin-menu'
+      $plugin_settings
     );
   }
 
   public function slider_one_settings_section_callback() {
-    echo '<p>This is the settings section for slider one</p>';
+    echo '<p>hello from the plugin</p>';
   }
 
 }
