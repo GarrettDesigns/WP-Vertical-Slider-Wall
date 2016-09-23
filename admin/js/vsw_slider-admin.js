@@ -29,4 +29,15 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
+   $(function() {
+
+     var addSlideInput = '<tr>' +
+                           '<td>' +
+                             '<input type="button" class="button" value="Add Slide">' +
+                           '</td>' +
+                         '</tr>';
+
+     $('.form-table').append(addSlideInput);
+   });
+
 })( jQuery );
