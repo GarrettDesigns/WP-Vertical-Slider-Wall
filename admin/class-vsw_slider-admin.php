@@ -108,7 +108,7 @@ class Vsw_slider_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/vsw_slider-admin.js', array( 'jquery' ), $this->version, false );
-
+    wp_localize_script( $this->plugin_name, 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'form_data' => get_option( $this->plugin_name . '-settings' ) ) );
 	}
 
   /**
@@ -124,7 +124,7 @@ class Vsw_slider_Admin {
       'manage_options',
       'vsw-admin-menu',
       array( $this, 'vsw_menu_page_content_callback' ),
-      'dashicons-images-alt2'
+      'dashicons-schedule'
     );
   }
 
@@ -164,6 +164,7 @@ class Vsw_slider_Admin {
     $plugin_settings = $this->plugin_name . '-settings';
 
     $options = get_option( $plugin_settings );
+    var_dump($options);
 
     $slide_image_value = ( isset( $options["slide_image"] ) ) ? $options["slide_image"] : '';
     $slide_title_value = ( isset( $options["slide_title"] ) ) ? $options["slide_title"] : '';
@@ -173,18 +174,7 @@ class Vsw_slider_Admin {
 
     $html = '';
 
-    $html .= '<tr class="slide">'
-    . '<td>'
-    . '<img class="' . $is_hidden . '" src="' . $slide_image_value . '">'
-    . '<input type="button" name="' . $plugin_settings .'[slide_image]" class="button" value="Upload Image">'
-    . '</td>'
-    . '<td>'
-    . '<input type="text" name="' . $plugin_settings . '[slide_title]" class="" value="' . $slide_title_value . '">'
-    . '</td>'
-    . '<td>'
-    . '<input type="text" name="' . $plugin_settings . '[slide_link]" class="" value="' . $slide_link_value . '">'
-    . '</td>'
-    . '</tr>';
+    $html .= '<fieldset>';
 
     $html .= '<tr class="slide">'
     . '<td>'
@@ -192,26 +182,25 @@ class Vsw_slider_Admin {
     . '<input type="button" name="' . $plugin_settings .'[slide_image]" class="button" value="Upload Image">'
     . '</td>'
     . '<td>'
-    . '<input type="text" name="' . $plugin_settings . '[slide_title]" class="" value="' . $slide_title_value . '">'
+    . '<input type="text" name="' . $plugin_settings . '[slide_title]" class="regular-text" value="' . $slide_title_value . '">'
     . '</td>'
     . '<td>'
-    . '<input type="text" name="' . $plugin_settings . '[slide_link]" class="" value="' . $slide_link_value . '">'
+    . '<input type="text" name="' . $plugin_settings . '[slide_link]" class="regular-text" value="' . $slide_link_value . '">'
     . '</td>'
     . '</tr>';
 
-    $html .= '<tr class="slide">'
-    . '<td>'
-    . '<img class="' . $is_hidden . '" src="' . $slide_image_value . '">'
-    . '<input type="button" name="' . $plugin_settings .'[slide_image]" class="button" value="Upload Image">'
-    . '</td>'
-    . '<td>'
-    . '<input type="text" name="' . $plugin_settings . '[slide_title]" class="" value="' . $slide_title_value . '">'
-    . '</td>'
-    . '<td>'
-    . '<input type="text" name="' . $plugin_settings . '[slide_link]" class="" value="' . $slide_link_value . '">'
-    . '</td>'
-    . '</tr>';
+    $html .= '</fieldset>';
 
     echo $html;
+  }
+
+  public function save_slide_data_callback() {
+    global $wpdb;
+
+    $form_data = get_option( $this->plugin_name . '-settings' );
+
+    var_dump( $form_data );
+
+    wp_die();
   }
 }

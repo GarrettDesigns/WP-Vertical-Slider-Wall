@@ -31,13 +31,46 @@
 
    $(function() {
 
+    appendAddSlide();
+    addNewSlide();
+
+     var data = {
+        'action': 'save_slide_data',
+        'slide_data': ajax_object
+     };
+
+     console.log(data);
+   });
+
+  function appendAddSlide() {
      var addSlideInput = '<tr>' +
                            '<td>' +
-                             '<input type="button" class="button" value="Add Slide">' +
+                             '<input type="button" class="add-slide-button button" value="Add Slide">' +
                            '</td>' +
                          '</tr>';
 
      $('.form-table').append(addSlideInput);
-   });
+   }
+
+   function addNewSlide() {
+
+    var lastSlide = $('.slide').last(),
+        newSlide = '<tr class="slide">' +
+                      '<td>' +
+                        '<img class="" src="">' +
+                        '<input type="button" name="" class="button" value="Upload Image">' +
+                      '</td>' +
+                      '<td>' +
+                        '<input type="text" name="" class="regular-text" value="">' +
+                      '</td>' +
+                      '<td>' +
+                        '<input type="text" name="" class="regular-text" value="">' +
+                      '</td>' +
+                    '</tr>';
+
+     $('.add-slide-button').on('click', function() {
+        $(newSlide).insertAfter(lastSlide);
+     });
+   }
 
 })( jQuery );
