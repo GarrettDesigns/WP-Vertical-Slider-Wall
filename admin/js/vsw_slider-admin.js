@@ -29,13 +29,13 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
+      var counter = 0;
+
    $(function() {
       var data = {
         'action': 'save_slide_data',
         'slide_data': ajax_object
       };
-
-      console.log(data);
 
       appendAddSlideButton();
       addNewSlide();
@@ -52,22 +52,26 @@
    }
 
    function addNewSlide() {
+
     var lastSlide = $('.slide').last(),
-        newSlide = '<tr class="slide">' +
+        newSlide = function(counter) { return '<tr class="slide">' +
                       '<td>' +
                         '<img class="" src="">' +
-                        '<input type="button" name="" class="button" value="Upload Image">' +
+                        '<input type="button" name="'+ ajax_object.option_table_name + '[slider_one][slide_0' + counter + '][slide_image]" class="button" value="Upload Image">' +
                       '</td>' +
                       '<td>' +
-                        '<input type="text" name="" class="regular-text" value="">' +
+                        '<input type="text" name="'+ ajax_object.option_table_name + '[slider_one][slide_0' + counter + '][slide_title]" class="regular-text" value="">' +
                       '</td>' +
                       '<td>' +
-                        '<input type="text" name="" class="regular-text" value="">' +
+                        '<input type="text" name="'+ ajax_object.option_table_name + '[slider_one][slide_0' + counter + '][slide_link]" class="regular-text" value="">' +
                       '</td>' +
                     '</tr>';
+                  }
+
 
      $('.add-slide-button').on('click', function() {
-        $(newSlide).insertAfter(lastSlide);
+        $(newSlide(counter)).insertAfter(lastSlide);
+        counter++;
      });
    }
 

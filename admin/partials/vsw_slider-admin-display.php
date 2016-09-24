@@ -19,10 +19,16 @@
 
   <h1><?php echo $this->settings_title; ?> Settings</h1>
 
-  <form method="post" action="options.php">
+  <form method="post" action="">
+    <?php var_dump($_POST); ?>
     <?php settings_fields( $this->plugin_name . '-settings' ); ?>
     <?php do_settings_sections( $this->plugin_name . '-settings' ); ?>
     <?php submit_button(); ?>
   </form>
 
+  <?php
+    if( isset( $_POST['submit'] ) ) {
+      update_option( $this->plugin_name. '-settings', $_POST[$this->plugin_name . '-settings'] );
+    }
+  ?>
 </div>

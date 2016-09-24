@@ -108,7 +108,7 @@ class Vsw_slider_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/vsw_slider-admin.js', array( 'jquery' ), $this->version, false );
-    wp_localize_script( $this->plugin_name, 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'form_data' => get_option( $this->plugin_name . '-settings' ) ) );
+    wp_localize_script( $this->plugin_name, 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'option_table_name' => $this->plugin_name . '-settings' ) );
 	}
 
   /**
@@ -164,8 +164,8 @@ class Vsw_slider_Admin {
     $plugin_settings = $this->plugin_name . '-settings';
 
     $options = get_option( $plugin_settings );
-    $slider_one = $options["slider_one"];
-    var_dump($options);
+    var_dump( $options );
+    // $slider_one = $options["slider_one"];
 
     $slide_image_value = ( isset( $slider_one["slide_01"]["slide_image"] ) ) ? $slider_one["slide_01"]["slide_image"] : '';
     $slide_title_value = ( isset( $slider_one["slide_01"]["slide_title"] ) ) ? $slider_one["slide_01"]["slide_title"] : '';
@@ -194,11 +194,12 @@ class Vsw_slider_Admin {
   }
 
   public function save_slide_data_callback() {
-    global $wpdb;
 
-    $form_data = get_option( $this->plugin_name . '-settings' );
+    $form_data = $_POST['slide_data'];
 
-    var_dump( $form_data );
+    update_option( $this->plugin_name . '-settings', $form_data );
+
+    echo wp_json_encode( $form_data );
 
     wp_die();
   }
