@@ -30,30 +30,28 @@
 	 */
 
    $(function() {
-
-    appendAddSlide();
-    addNewSlide();
-
-     var data = {
+      var data = {
         'action': 'save_slide_data',
         'slide_data': ajax_object
-     };
+      };
 
-     console.log(data);
+      console.log(data);
+
+      appendAddSlideButton();
+      addNewSlide();
    });
 
-  function appendAddSlide() {
-     var addSlideInput = '<tr>' +
-                           '<td>' +
-                             '<input type="button" class="add-slide-button button" value="Add Slide">' +
-                           '</td>' +
-                         '</tr>';
+  function appendAddSlideButton() {
+    var addSlideInput = '<tr>' +
+                          '<td>' +
+                            '<input type="button" class="add-slide-button button" value="Add Slide">' +
+                          '</td>' +
+                        '</tr>';
 
-     $('.form-table').append(addSlideInput);
+    $('.form-table').append(addSlideInput);
    }
 
    function addNewSlide() {
-
     var lastSlide = $('.slide').last(),
         newSlide = '<tr class="slide">' +
                       '<td>' +

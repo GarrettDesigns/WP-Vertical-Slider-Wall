@@ -164,32 +164,31 @@ class Vsw_slider_Admin {
     $plugin_settings = $this->plugin_name . '-settings';
 
     $options = get_option( $plugin_settings );
+    $slider_one = $options["slider_one"];
     var_dump($options);
 
-    $slide_image_value = ( isset( $options["slide_image"] ) ) ? $options["slide_image"] : '';
-    $slide_title_value = ( isset( $options["slide_title"] ) ) ? $options["slide_title"] : '';
-    $slide_link_value = ( isset( $options["slide_link"] ) ) ? $options["slide_link"] : '';
+    $slide_image_value = ( isset( $slider_one["slide_01"]["slide_image"] ) ) ? $slider_one["slide_01"]["slide_image"] : '';
+    $slide_title_value = ( isset( $slider_one["slide_01"]["slide_title"] ) ) ? $slider_one["slide_01"]["slide_title"] : '';
+    $slide_link_value = ( isset( $slider_one["slide_01"]["slide_link"] ) ) ? $slider_one["slide_01"]["slide_link"] : '';
 
     $is_hidden = ( isset( $options["slide_image"] ) ) ? 'hidden' : '';
 
     $html = '';
 
-    $html .= '<fieldset>';
-
-    $html .= '<tr class="slide">'
-    . '<td>'
-    . '<img class="' . $is_hidden . '" src="' . $slide_image_value . '">'
-    . '<input type="button" name="' . $plugin_settings .'[slide_image]" class="button" value="Upload Image">'
-    . '</td>'
-    . '<td>'
-    . '<input type="text" name="' . $plugin_settings . '[slide_title]" class="regular-text" value="' . $slide_title_value . '">'
-    . '</td>'
-    . '<td>'
-    . '<input type="text" name="' . $plugin_settings . '[slide_link]" class="regular-text" value="' . $slide_link_value . '">'
-    . '</td>'
-    . '</tr>';
-
-    $html .= '</fieldset>';
+    $html .= '<fieldset>'
+              . '<tr class="slide">'
+                  . '<td>'
+                    . '<img class="' . $is_hidden . '" src="' . $slide_image_value . '">'
+                    . '<input type="button" name="' . $plugin_settings .'[slider_one][slide_01][slide_image]" class="button" value="Upload Image">'
+                  . '</td>'
+                  . '<td>'
+                    . '<input type="text" name="' . $plugin_settings . '[slider_one][slide_01][slide_title]" class="regular-text" value="' . $slide_title_value . '">'
+                  . '</td>'
+                  . '<td>'
+                      . '<input type="text" name="' . $plugin_settings . '[slider_one][slide_01][slide_link]" class="regular-text" value="' . $slide_link_value . '">'
+                . '</td>'
+              . '</tr>'
+          . '</fieldset>';
 
     echo $html;
   }
