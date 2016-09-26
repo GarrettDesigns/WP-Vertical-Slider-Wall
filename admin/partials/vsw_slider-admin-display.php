@@ -17,7 +17,7 @@
 
 <?php
 
-$options = $this->plugin_name . '-settings';
+$options = get_option( $this->plugin_name . '-settings' );
 
 var_dump( $options );
 
