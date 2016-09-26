@@ -15,6 +15,14 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 
+<?php
+
+$options = $this->plugin_name . '-settings';
+
+var_dump( $options );
+
+ ?>
+
 <div class="wrap">
 
   <h1><?php echo $this->settings_title; ?> Settings</h1>

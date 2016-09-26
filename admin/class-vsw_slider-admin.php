@@ -164,8 +164,6 @@ class Vsw_slider_Admin {
     $plugin_settings = $this->plugin_name . '-settings';
     $options = get_option( $plugin_settings );
 
-    var_dump( $options );
-
   }
 
   public function save_slide_data_callback() {

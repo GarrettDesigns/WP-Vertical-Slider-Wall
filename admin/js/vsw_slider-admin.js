@@ -53,32 +53,26 @@
 
    function addNewSlide() {
 
-    var lastSlide = $('.slide').last(),
-        newSlide = function(counter) {
-          return '<tr class="slide">' +
-                    '<td>' +
-                      '<img class="" src="">' +
-                      '<input type="button" name="'+ ajax_object.option_table_name + '[slider_one][slide_' + counter + '][slide_image]" class="button" value="Upload Image">' +
-                    '</td>' +
-                    '<td>' +
-                      '<input type="text" name="'+ ajax_object.option_table_name + '[slider_one][slide_' + counter + '][slide_title]" class="regular-text" value="">' +
-                    '</td>' +
-                    '<td>' +
-                      '<input type="text" name="'+ ajax_object.option_table_name + '[slider_one][slide_' + counter + '][slide_link]" class="regular-text" value="">' +
-                    '</td>' +
-                  '</tr>';
-        }
-
-
      $('.add-slide-button').on('click', function() {
+      var lastSlide = $('.slide').last(),
+          newSlide = '<tr class="slide">' +
+                        '<td>' +
+                          '<img class="" src="">' +
+                          '<input type="button" name="'+ ajax_object.option_table_name + '[slider_one][slide_' + $('.slide').length + '][slide_image]" class="button" value="upload image">' +
+                        '</td>' +
+                        '<td>' +
+                          '<input type="text" name="'+ ajax_object.option_table_name + '[slider_one][slide_' + $('.slide').length + '][slide_title]" class="regular-text" value="">' +
+                        '</td>' +
+                        '<td>' +
+                          '<input type="text" name="'+ ajax_object.option_table_name + '[slider_one][slide_' + $('.slide').length + '][slide_link]" class="regular-text" value="">' +
+                        '</td>' +
+                      '</tr>';
 
-      if(!$('.slide')) {
-        $('.form-table').append(newSlide(counter));
+      if($('.slide').length) {
+        $(newSlide).insertAfter(lastSlide);
       } else {
-        $(newSlide(counter)).insertAfter(lastSlide);
+        $('.form-table').append(newSlide);
       }
-      
-      counter++;
     });
    }
 
