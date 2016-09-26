@@ -29,16 +29,15 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
-  var counter = 1;
 
   $(function() {
-      var data = {
-        'action': 'save_slide_data',
-        'slide_data': ajax_object
-      };
+      var slideLength = $('.slide').length,
+          data = {
+            'action': 'save_slide_data',
+          };
 
       appendAddSlideButton();
-      addNewSlide();
+      addNewSlide(slideLength);
   });
 
   function appendAddSlideButton() {
@@ -51,27 +50,34 @@
     $('.form-table').append(addSlideInput);
    }
 
-   function addNewSlide() {
+   function addNewSlide(slideLength) {
 
-     $('.add-slide-button').on('click', function() {
+    var optionTableName = ajax_object.option_table_name;
+
+    $('.add-slide-button').on('click', function() {
+
+      slideLength++;
+
       var lastSlide = $('.slide').last(),
-          newSlide = '<tr class="slide">' +
+          newSlide = function(slideLength) {
+              return '<tr class="slide">' +
                         '<td>' +
                           '<img class="" src="">' +
-                          '<input type="button" name="'+ ajax_object.option_table_name + '[slider_one][slide_' + $('.slide').length + '][slide_image]" class="button" value="upload image">' +
+                          '<input type="button" name="'+ optionTableName + '[slider_one][slide_' + slideLength + '][slide_image]" class="button" value="upload image">' +
                         '</td>' +
                         '<td>' +
-                          '<input type="text" name="'+ ajax_object.option_table_name + '[slider_one][slide_' + $('.slide').length + '][slide_title]" class="regular-text" value="">' +
+                          '<input type="text" name="'+ optionTableName + '[slider_one][slide_' + slideLength + '][slide_title]" class="regular-text" value="">' +
                         '</td>' +
                         '<td>' +
-                          '<input type="text" name="'+ ajax_object.option_table_name + '[slider_one][slide_' + $('.slide').length + '][slide_link]" class="regular-text" value="">' +
+                          '<input type="text" name="'+ optionTableName + '[slider_one][slide_' + slideLength + '][slide_link]" class="regular-text" value="">' +
                         '</td>' +
                       '</tr>';
+            };
 
       if($('.slide').length) {
-        $(newSlide).insertAfter(lastSlide);
+        $(newSlide(slideLength)).insertAfter(lastSlide);
       } else {
-        $('.form-table').append(newSlide);
+        $('.form-table').append(newSlide(slideLength));
       }
     });
    }

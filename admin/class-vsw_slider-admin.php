@@ -168,12 +168,7 @@ class Vsw_slider_Admin {
 
   public function save_slide_data_callback() {
 
-    $form_data = $_POST['slide_data'];
-
     update_option( $this->plugin_name . '-settings', $form_data );
-
-    echo wp_json_encode( $form_data );
-
-    wp_die();
+    
   }
 }
