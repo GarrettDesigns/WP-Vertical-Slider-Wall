@@ -29,9 +29,9 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
-      var counter = 0;
+  var counter = 1;
 
-   $(function() {
+  $(function() {
       var data = {
         'action': 'save_slide_data',
         'slide_data': ajax_object
@@ -39,7 +39,7 @@
 
       appendAddSlideButton();
       addNewSlide();
-   });
+  });
 
   function appendAddSlideButton() {
     var addSlideInput = '<tr>' +
@@ -54,25 +54,32 @@
    function addNewSlide() {
 
     var lastSlide = $('.slide').last(),
-        newSlide = function(counter) { return '<tr class="slide">' +
-                      '<td>' +
-                        '<img class="" src="">' +
-                        '<input type="button" name="'+ ajax_object.option_table_name + '[slider_one][slide_0' + counter + '][slide_image]" class="button" value="Upload Image">' +
-                      '</td>' +
-                      '<td>' +
-                        '<input type="text" name="'+ ajax_object.option_table_name + '[slider_one][slide_0' + counter + '][slide_title]" class="regular-text" value="">' +
-                      '</td>' +
-                      '<td>' +
-                        '<input type="text" name="'+ ajax_object.option_table_name + '[slider_one][slide_0' + counter + '][slide_link]" class="regular-text" value="">' +
-                      '</td>' +
-                    '</tr>';
-                  }
+        newSlide = function(counter) {
+          return '<tr class="slide">' +
+                    '<td>' +
+                      '<img class="" src="">' +
+                      '<input type="button" name="'+ ajax_object.option_table_name + '[slider_one][slide_' + counter + '][slide_image]" class="button" value="Upload Image">' +
+                    '</td>' +
+                    '<td>' +
+                      '<input type="text" name="'+ ajax_object.option_table_name + '[slider_one][slide_' + counter + '][slide_title]" class="regular-text" value="">' +
+                    '</td>' +
+                    '<td>' +
+                      '<input type="text" name="'+ ajax_object.option_table_name + '[slider_one][slide_' + counter + '][slide_link]" class="regular-text" value="">' +
+                    '</td>' +
+                  '</tr>';
+        }
 
 
      $('.add-slide-button').on('click', function() {
+
+      if(!$('.slide')) {
+        $('.form-table').append(newSlide(counter));
+      } else {
         $(newSlide(counter)).insertAfter(lastSlide);
-        counter++;
-     });
+      }
+      
+      counter++;
+    });
    }
 
 })( jQuery );

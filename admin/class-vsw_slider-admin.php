@@ -162,35 +162,10 @@ class Vsw_slider_Admin {
   public function generate_custom_slide_inputs() {
 
     $plugin_settings = $this->plugin_name . '-settings';
-
     $options = get_option( $plugin_settings );
+
     var_dump( $options );
-    // $slider_one = $options["slider_one"];
 
-    $slide_image_value = ( isset( $slider_one["slide_01"]["slide_image"] ) ) ? $slider_one["slide_01"]["slide_image"] : '';
-    $slide_title_value = ( isset( $slider_one["slide_01"]["slide_title"] ) ) ? $slider_one["slide_01"]["slide_title"] : '';
-    $slide_link_value = ( isset( $slider_one["slide_01"]["slide_link"] ) ) ? $slider_one["slide_01"]["slide_link"] : '';
-
-    $is_hidden = ( isset( $options["slide_image"] ) ) ? 'hidden' : '';
-
-    $html = '';
-
-    $html .= '<fieldset>'
-              . '<tr class="slide">'
-                  . '<td>'
-                    . '<img class="' . $is_hidden . '" src="' . $slide_image_value . '">'
-                    . '<input type="button" name="' . $plugin_settings .'[slider_one][slide_01][slide_image]" class="button" value="Upload Image">'
-                  . '</td>'
-                  . '<td>'
-                    . '<input type="text" name="' . $plugin_settings . '[slider_one][slide_01][slide_title]" class="regular-text" value="' . $slide_title_value . '">'
-                  . '</td>'
-                  . '<td>'
-                      . '<input type="text" name="' . $plugin_settings . '[slider_one][slide_01][slide_link]" class="regular-text" value="' . $slide_link_value . '">'
-                . '</td>'
-              . '</tr>'
-          . '</fieldset>';
-
-    echo $html;
   }
 
   public function save_slide_data_callback() {
