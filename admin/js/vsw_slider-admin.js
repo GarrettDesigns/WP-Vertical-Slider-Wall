@@ -34,10 +34,11 @@
       var slideLength = $('.slide').length,
           data = {
             'action': 'save_slide_data',
-          };
+          },
+          optionTableName = ajax_object.option_table_name;
 
       appendAddSlideButton();
-      addNewSlide(slideLength);
+      addNewSlide(slideLength, optionTableName);
   });
 
   function appendAddSlideButton() {
@@ -50,34 +51,37 @@
     $('.form-table').append(addSlideInput);
    }
 
-   function addNewSlide(slideLength) {
+  function newSlide(slideLength, parentSlider, optionTableName) {
+      return '<tr class="slide">' +
+                '<td>' +
+                  '<img class="" src="">' +
+                  '<input type="button" name="'+ optionTableName + '[' + parentSlider + '][slide_' + slideLength + '][slide_image]" class="button" value="upload image">' +
+                '</td>' +
+                '<td>' +
+                  '<input type="text" name="'+ optionTableName + '[' + parentSlider + '][slide_' + slideLength + '][slide_title]" class="regular-text" value="">' +
+                '</td>' +
+                '<td>' +
+                  '<input type="text" name="'+ optionTableName + '[' + parentSlider + '][slide_' + slideLength + '][slide_link]" class="regular-text" value="">' +
+                '</td>' +
+              '</tr>';
+  }
 
-    var optionTableName = ajax_object.option_table_name;
+   function addNewSlide(slideLength, optionTableName) {
 
     $('.add-slide-button').on('click', function() {
 
+      var sliders = $(this).parents('table'),
+          sliderClassArray = sliders.attr('class').split(' '),
+          parentSlider = sliderClassArray[0],
+          parentSliderClass = $('.' + parentSlider),
+          lastSlide = parentSliderClass.find('.slide').last();
+
       slideLength++;
 
-      var lastSlide = $('.slide').last(),
-          newSlide = function(slideLength) {
-              return '<tr class="slide">' +
-                        '<td>' +
-                          '<img class="" src="">' +
-                          '<input type="button" name="'+ optionTableName + '[slider_one][slide_' + slideLength + '][slide_image]" class="button" value="upload image">' +
-                        '</td>' +
-                        '<td>' +
-                          '<input type="text" name="'+ optionTableName + '[slider_one][slide_' + slideLength + '][slide_title]" class="regular-text" value="">' +
-                        '</td>' +
-                        '<td>' +
-                          '<input type="text" name="'+ optionTableName + '[slider_one][slide_' + slideLength + '][slide_link]" class="regular-text" value="">' +
-                        '</td>' +
-                      '</tr>';
-            };
-
-      if($('.slide').length) {
-        $(newSlide(slideLength)).insertAfter(lastSlide);
+      if(parentSliderClass.find('.slide').length != 0) {
+        $(newSlide(slideLength, parentSlider, optionTableName)).insertAfter(lastSlide);
       } else {
-        $('.form-table').append(newSlide(slideLength));
+        parentSliderClass.append(newSlide(slideLength, parentSlider));
       }
     });
    }
