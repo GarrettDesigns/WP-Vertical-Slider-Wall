@@ -39,6 +39,7 @@
 
       appendAddSlideButton();
       addNewSlide(slideLength, optionTableName);
+      switchTabs();
   });
 
   function appendAddSlideButton() {
@@ -48,7 +49,7 @@
                           '</td>' +
                         '</tr>';
 
-    $('.form-table').append(addSlideInput);
+    $('.slider').append(addSlideInput);
    }
 
   function newSlide(slideLength, parentSlider, optionTableName) {
@@ -85,5 +86,16 @@
       }
     });
    }
+
+  function switchTabs() {
+
+    var slider = $('.slider');
+
+    $('.nav-tab-wrapper').on('click', 'a', function() {
+        slider.hide();
+        slider.eq($(this).index()).show();
+        return false;
+    });
+  }
 
 })( jQuery );
