@@ -45,8 +45,9 @@
         <?php foreach ( $slider_one_options as $option ) : ?>
               <tr class='slide'>
                 <td>
-                  <img class='' src=''>
-                  <input type='button' name='<?php echo $this->plugin_name; ?>-settings[slider_one][slide_<?php echo $counter; ?>][slide_image]' class='button' value='upload image'>
+                  <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_one][slide_<?php echo $counter; ?>][slide_image]'>
+                  <img class='slide_image_preview' src=''>
+                  <input type='button' class='image_upload_button button' value='upload image'>
                 </td>
                 <td>
                   <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_one][slide_<?php echo $counter; ?>][slide_title]' class='regular-text' value='<?php echo $option['slide_title']; ?>'>
@@ -64,8 +65,9 @@
         <?php foreach ( $slider_two_options as $option ) : ?>
               <tr class='slide'>
                 <td>
-                  <img class='' src=''>
-                  <input type='button' name='<?php echo $this->plugin_name; ?>-settings[slider_two][slide_<?php echo $counter; ?>][slide_image]' class='button' value='upload image'>
+                  <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_two][slide_<?php echo $counter; ?>][slide_image]'>
+                  <img class='slide_image_preview' src=''>
+                  <input type='button' class='image_upload_button button' value='upload image'>
                 </td>
                 <td>
                   <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_two][slide_<?php echo $counter; ?>][slide_title]' class='regular-text' value='<?php echo $option['slide_title']; ?>'>
@@ -78,13 +80,14 @@
         <?php endforeach; ?>
       <?php endif; ?>
     </table>
-    <table class="slider_two slider widefat form-table">
+    <table class="slider_three slider widefat form-table">
       <?php if ( count( $slider_three_options ) ) : ?>
         <?php foreach ( $slider_three_options as $option ) : ?>
               <tr class='slide'>
                 <td>
-                  <img class='' src=''>
-                  <input type='button' name='<?php echo $this->plugin_name; ?>-settings[slider_three][slide_<?php echo $counter; ?>][slide_image]' class='button' value='upload image'>
+                  <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_three][slide_<?php echo $counter; ?>][slide_image]'>
+                  <img class='slide_image_preview' src=''>
+                  <input type='button' class='image_upload_button button' value='upload image'>
                 </td>
                 <td>
                   <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_three][slide_<?php echo $counter; ?>][slide_title]' class='regular-text' value='<?php echo $option['slide_title']; ?>'>
@@ -102,8 +105,9 @@
         <?php foreach ( $slider_four_options as $option ) : ?>
           <tr class='slide'>
             <td>
-              <img class='' src=''>
-              <input type='button' name='<?php echo $this->plugin_name; ?>-settings[slider_four][slide_<?php echo $counter; ?>][slide_image]' class='button' value='upload image'>
+              <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_four][slide_<?php echo $counter; ?>][slide_image]'>
+              <img class='slide_image_preview' src=''>
+              <input type='button' class='image_upload_button button' value='upload image'>
             </td>
             <td>
               <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_four][slide_<?php echo $counter; ?>][slide_title]' class='regular-text' value='<?php echo $option['slide_title']; ?>'>

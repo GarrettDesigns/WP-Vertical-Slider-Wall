@@ -106,7 +106,7 @@ class Vsw_slider_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
+    wp_enqueue_media();
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/vsw_slider-admin.js', array( 'jquery' ), $this->version, false );
     wp_localize_script( $this->plugin_name, 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'option_table_name' => $this->plugin_name . '-settings' ) );
 	}
@@ -169,6 +169,6 @@ class Vsw_slider_Admin {
   public function save_slide_data_callback() {
 
     update_option( $this->plugin_name . '-settings', $form_data );
-    
+
   }
 }

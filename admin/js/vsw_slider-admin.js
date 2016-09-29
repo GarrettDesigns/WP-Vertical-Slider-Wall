@@ -39,6 +39,7 @@
 
       appendAddSlideButton();
       addNewSlide(slideLength, optionTableName);
+      addSlideImage();
       switchTabs();
   });
 
@@ -55,8 +56,9 @@
   function newSlide(slideLength, parentSlider, optionTableName) {
       return '<tr class="slide">' +
                 '<td>' +
-                  '<img class="" src="">' +
-                  '<input type="button" name="'+ optionTableName + '[' + parentSlider + '][slide_' + slideLength + '][slide_image]" class="button" value="upload image">' +
+                  '<img class="slide_image_preview" src="">' +
+                  '<input type="hidden" value="' + + '" name="' + optionTableName + '[' + parentSlider + '][slide_' + slideLength + '][slide_image_id]">' +
+                  '<input type="button" class="button" value="upload image">' +
                 '</td>' +
                 '<td>' +
                   '<input type="text" name="'+ optionTableName + '[' + parentSlider + '][slide_' + slideLength + '][slide_title]" class="regular-text" value="">' +
@@ -87,15 +89,92 @@
     });
    }
 
-  function switchTabs() {
-
+  function switchTabs(sessionData) {
     var slider = $('.slider');
 
     $('.nav-tab-wrapper').on('click', 'a', function() {
+        $('.nav-tab-wrapper').find('a').removeClass('nav-tab-active');
+        $(this).addClass('nav-tab-active');
         slider.hide();
         slider.eq($(this).index()).show();
         return false;
     });
   }
+
+  function addSlideImage() {
+
+    var slide = $('.slide');
+
+    slide.on( 'click', '.image_upload_button', function( event ){
+
+      var thisButton = $(this),
+          currentSlide = thisButton.parents('.slide');
+
+      event.preventDefault();
+
+      // If the media frame already exists, reopen it.
+      if ( frame ) {
+        frame.open();
+        return;
+      }
+
+      // Create a new media frame
+      var frame = wp.media({
+        title: 'Select or Upload Media Of Your Chosen Persuasion',
+        button: {
+          text: 'Use this media'
+        },
+        multiple: true  // Set to true to allow multiple files to be selected
+      });
+
+
+      // When an image is selected in the media frame...
+      frame.on( 'select', function() {
+
+      $('.slide').css("background", "");
+      currentSlide.css("background", "lightblue");
+
+        // Get media attachment details from the frame state
+        var attachment = frame.state().get('selection').first().toJSON();
+
+        // Send the attachment URL to our custom image input field.
+        currentSlide.find('.slide_image_preview').attr('src', attachment.url);
+
+        // Send the attachment id to our hidden input
+        currentSlide.find('.image_upload_id').val( attachment.id );
+
+        // Hide the add image link
+        thisButton.addClass( 'hidden' );
+
+        // Unhide the remove image link
+        // delImgLink.removeClass( 'hidden' );
+      });
+
+      // Finally, open the modal on click
+      frame.open();
+    });
+  }
+
+  function removeSlideImage() {
+    // DELETE IMAGE LINK
+    delImgLink.on( 'click', function( event ){
+
+      event.preventDefault();
+
+      // Clear out the preview image
+      imgContainer.html( '' );
+
+      // Un-hide the add image link
+      addImgLink.removeClass( 'hidden' );
+
+      // Hide the delete image link
+      delImgLink.addClass( 'hidden' );
+
+      // Delete the image id from the hidden input
+      imgIdInput.val( '' );
+
+    });
+  }
+
 
 })( jQuery );

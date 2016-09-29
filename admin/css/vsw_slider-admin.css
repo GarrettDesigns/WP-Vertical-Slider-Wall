@@ -3,10 +3,21 @@
  * included in this file.
  */
 
+ /**
+  * Global styles for defaults
+  *
+  */
+
  .slider {
    display: none;
  }
 
  .slider_one {
    display: block;
+ }
+
+ .slide_image_preview {
+   max-width: 200px;
+   max-height: 200px;
+   overflow: hidden;
  }
