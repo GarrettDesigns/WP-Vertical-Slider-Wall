@@ -8,6 +8,10 @@
   *
   */
 
+  .hidden {
+    display: none;
+  }
+
  .slider {
    display: none;
  }
