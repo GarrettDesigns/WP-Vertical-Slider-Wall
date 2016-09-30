@@ -45,7 +45,7 @@
         <?php foreach ( $slider_one_options as $option ) : ?>
               <tr class='slide'>
                 <td>
-                  <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_one][slide_<?php echo $counter; ?>][slide_image_id]' value='<?php echo ( !empty( $option["slide_image_id"] ) ) ? $option["slide_image_id"] : ""; ?>'>
+                  <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_one][slide_<?php echo $counter; ?>][slide_image_id]' value='<?php echo $option["slide_image_id"]; ?>'>
                   <img class='slide_image_preview' src='<?php echo wp_get_attachment_image_url( $option['slide_image_id'] ); ?>'>
                   <input type='button' class='image_upload_button button <?php echo ( !empty( $option["slide_image_id"] ) ) ? "hidden" : ""; ?>' value='upload image'>
                 </td>
@@ -67,7 +67,7 @@
                 <td>
                   <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_two][slide_<?php echo $counter; ?>][slide_image_id]' value='<?php echo ( !empty( $option["slide_image_id"] ) ) ? $option["slide_image_id"] : ""; ?>'>
                   <img class='slide_image_preview' src='<?php echo wp_get_attachment_image_url( $option['slide_image_id'] ); ?>'>
-                  <input type='button' class='image_upload_button button <?php echo ( !empty( $option["slide_image_id"] ) ) ? "hidden" : ""; ?>' value='upload image'>
+                  <input type='button' class='image_upload_button button <?php echo $option["slide_image_id"]; ?>' value='upload image'>
                 </td>
                 <td>
                   <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_two][slide_<?php echo $counter; ?>][slide_title]' class='regular-text' value='<?php echo $option['slide_title']; ?>'>
@@ -87,7 +87,7 @@
                 <td>
                   <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_three][slide_<?php echo $counter; ?>][slide_image_id]' value='<?php echo ( !empty( $option["slide_image_id"] ) ) ? $option["slide_image_id"] : ""; ?>'>
                   <img class='slide_image_preview' src='<?php echo wp_get_attachment_image_url( $option['slide_image_id'] ); ?>'>
-                  <input type='button' class='image_upload_button button <?php echo ( !empty( $option["slide_image_id"] ) ) ? "hidden" : ""; ?>' value='upload image'>
+                  <input type='button' class='image_upload_button button <?php echo $option["slide_image_id"]; ?>' value='upload image'>
                 </td>
                 <td>
                   <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_three][slide_<?php echo $counter; ?>][slide_title]' class='regular-text' value='<?php echo $option['slide_title']; ?>'>
@@ -107,7 +107,7 @@
             <td>
               <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_four][slide_<?php echo $counter; ?>][slide_image_id]' value='<?php echo ( !empty( $option["slide_image_id"] ) ) ? $option["slide_image_id"] : ""; ?>'>
               <img class='slide_image_preview' src='<?php echo wp_get_attachment_image_url( $option['slide_image_id'] ); ?>'>
-              <input type='button' class='image_upload_button button <?php echo ( !empty( $option["slide_image_id"] ) ) ? "hidden" : ""; ?>' value='upload image'>
+              <input type='button' class='image_upload_button button <?php echo $option["slide_image_id"]; ?>' value='upload image'>
             </td>
             <td>
               <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_four][slide_<?php echo $counter; ?>][slide_title]' class='regular-text' value='<?php echo $option['slide_title']; ?>'>

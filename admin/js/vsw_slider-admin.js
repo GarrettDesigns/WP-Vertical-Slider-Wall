@@ -57,8 +57,8 @@
       return '<tr class="slide">' +
                 '<td>' +
                   '<img class="slide_image_preview" src="">' +
-                  '<input type="hidden" value="' + + '" name="' + optionTableName + '[' + parentSlider + '][slide_' + slideLength + '][slide_image_id]">' +
-                  '<input type="button" class="button" value="upload image">' +
+                  '<input type="hidden" value="" name="' + optionTableName + '[' + parentSlider + '][slide_' + slideLength + '][slide_image_id]">' +
+                  '<input type="button" class="image_upload_button button" value="upload image">' +
                 '</td>' +
                 '<td>' +
                   '<input type="text" name="'+ optionTableName + '[' + parentSlider + '][slide_' + slideLength + '][slide_title]" class="regular-text" value="">' +
@@ -86,6 +86,8 @@
       } else {
         parentSliderClass.append(newSlide(slideLength, parentSlider));
       }
+      
+      addSlideImage();
     });
    }
 
