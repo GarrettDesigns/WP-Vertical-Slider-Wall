@@ -31,11 +31,10 @@
 
 
   $(function() {
-      var slideLength = $('.slide').length,
-          optionTableName = ajax_object.option_table_name;
+      var optionTableName = ajax_object.option_table_name;
 
       appendAddSlideButton();
-      addNewSlide(slideLength, optionTableName);
+      addNewSlide(optionTableName);
       addSlideImage();
       removeSlideImage();
       removeSlide();
@@ -58,7 +57,7 @@
       return '<tr class="slide">' +
                 '<td>' +
                   '<img style="max-width: 200px; max-height: 200px; overflow: hidden;" class="slide_image_preview" src="">' +
-                  '<input type="hidden" value="" name="' + optionTableName + '[' + parentSlider + '][slides][slide_' + slideLength + '][slide_image_id]">' +
+                  '<input type="hidden" class="image_upload_id" name="' + optionTableName + '[' + parentSlider + '][slides][slide_' + slideLength + '][slide_image_id]" value="">' +
                   '<input type="button" class="image_upload_button button" value="upload image">' +
                 '</td>' +
                 '<td>' +
@@ -73,9 +72,11 @@
               '</tr>';
   }
 
-   function addNewSlide(slideLength, optionTableName) {
+   function addNewSlide(optionTableName) {
+     var slideLength;
 
-    $('.add-slide-button').on('click', function() {
+    $('.add-slide-button').on('click', function(slideLength) {
+      slideLength = $(this).parents('tbody').find('.slide').length;
 
       var sliders = $(this).parents('table'),
           sliderClassArray = sliders.attr('class').split(' '),
@@ -83,15 +84,17 @@
           parentSliderClass = $('.' + parentSlider),
           lastSlide = parentSliderClass.find('.slide').last();
 
-      slideLength++;
-
       if(parentSliderClass.find('.slide').length != 0) {
+        console.log(slideLength);
+        slideLength++;
         $(newSlide(slideLength, parentSlider, optionTableName)).insertAfter(lastSlide);
+        console.log(slideLength);
       } else {
-        parentSliderClass.append(newSlide(slideLength, parentSlider));
+        parentSliderClass.prepend(newSlide(slideLength, parentSlider));
       }
 
       addSlideImage();
+      removeSlide();
     });
    }
 

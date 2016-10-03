@@ -167,16 +167,29 @@ class Vsw_slider_Admin {
   public function render_sliders() {
     $sliders = get_option( $this->plugin_name . '-settings' );
 
+    $slider_one = $sliders['slider_one'];
+    $slider_two = $sliders['slider_two'];
+    $slider_three = $sliders['slider_three'];
+    $slider_four = $sliders['slider_four'];
+
+    self::render_single_slider( $slider_one );
+    self::render_single_slider( $slider_two );
+    self::render_single_slider( $slider_three );
+    self::render_single_slider( $slider_four );
+  }
+
+  public function render_single_slider( $slider ) {
     echo '<div class="vsw_slider">';
-      foreach( $sliders as $slider => $slider_info ) {
-        var_dump($slider_info["slides"]);
-        foreach( $slider_info['slides'] as $slide ) {
-        echo '<div class="vsw_slide">';
-          echo '<img src="' . wp_get_attachment_image_url( $slide["slide_image_id"], "full") . '" alt="">';
-          echo '<p>' . !empty( $slide["slide_title"] ) ? _e( $slide["slide_title"] ) : '' . '</p>';
-        echo '</div>';
+      foreach( $slider['slides'] as $slide ) {
+        $html = '';
+
+        $html .= '<div class="vsw_slide">';
+        $html .= '<a href="' . $slide["slide_link"] . '"><img src="' . wp_get_attachment_image_url( $slide["slide_image_id"], "full") . '" alt=""></a>';
+        $html .= '<p>' . isset( $slide["slide_title"] ) ?  $slide["slide_title"] : "" . '</p>';
+        $html .= '</div>';
+
+        echo $html;
       }
-    }
     echo '</div>';
   }
 

@@ -23,10 +23,10 @@
   $slider_three_options = isset( $options['slider_three'] ) ? $options['slider_three'] : array();
   $slider_four_options = isset( $options['slider_four'] ) ? $options['slider_four'] : array();
 
-  $slider_one_slides = isset( $slider_one_options['slides'] ) ? $slider_one_options['slides'] : array();
-  $slider_two_slides = isset( $slider_two_options['slides'] ) ? $slider_two_options['slides'] : array();
-  $slider_three_slides = isset( $slider_three_options['slides'] ) ? $slider_three_options['slides'] : array();
-  $slider_four_slides = isset( $slider_four_options['slides'] ) ? $slider_four_options['slides'] : array();
+  $slider_one_slides = !empty( $slider_one_options['slides'] ) ? $slider_one_options['slides'] : array();
+  $slider_two_slides = !empty( $slider_two_options['slides'] ) ? $slider_two_options['slides'] : array();
+  $slider_three_slides = !empty( $slider_three_options['slides'] ) ? $slider_three_options['slides'] : array();
+  $slider_four_slides = !empty( $slider_four_options['slides'] ) ? $slider_four_options['slides'] : array();
 
   $counter = 0;
 ?>
@@ -131,19 +131,19 @@
         <?php foreach ( $slider_two_slides as $slide ) : ?>
               <tr class='slide' colspan="3">
                 <td>
-                  <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_two][slides][slide_<?php echo $counter; ?>][slide_image_id]' value='<?php echo isset ( $slide["slide_image_id"] ) ? $slide["slide_image_id"] : ''; ?>'>
+                  <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_two][slides][slide_<?php echo $counter; ?>][slide_image_id]' value='<?php echo $slide["slide_image_id"]; ?>'>
                   <div class="image-preview-container">
                     <span class="image-controls remove-image-button">X</span>
                     <span class="image-controls edit-image-button">E</span>
-                    <img class='slide_image_preview' src='<?php echo isset( $slide['slide_image_id'] ) ? wp_get_attachment_image_url( $slide['slide_image_id'], 'thumbnail' ) : ''; ?>'>
+                    <img class='slide_image_preview' src='<?php echo wp_get_attachment_image_url( $slide['slide_image_id'], 'thumbnail' ); ?>'>
                   </div>
                   <input type='button' class='image_upload_button button <?php echo ( !empty( $slide["slide_image_id"] ) ) ? "hidden" : ""; ?>' value='upload image'>
                 </td>
                 <td>
-                  <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_two][slide_<?php echo $counter; ?>][slide_title]' class='regular-text' value='<?php echo isset ( $slide['slide_title'] ) ? $slide['slide_title'] : ''; ?>'>
+                  <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_two][slides][slide_<?php echo $counter; ?>][slide_title]' class='regular-text' value='<?php echo isset ( $slide['slide_title'] ) ? $slide['slide_title'] : ''; ?>'>
                 </td>
                 <td>
-                  <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_two][slide_<?php echo $counter; ?>][slide_link]' class='regular-text' value='<?php echo isset( $slide['slide_link'] ) ? $slide['slide_link'] : ''; ?>'>
+                  <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_two][slides][slide_<?php echo $counter; ?>][slide_link]' class='regular-text' value='<?php echo isset( $slide['slide_link'] ) ? $slide['slide_link'] : ''; ?>'>
                 </td>
                 <td>
                   <a class="remove-slide-link" href="#">Remove Slide</a>
@@ -186,7 +186,7 @@
         <?php foreach ( $slider_three_slides as $slide ) : ?>
               <tr class='slide' colspan="3">
                 <td>
-                  <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_three][slides][slide_<?php echo $counter; ?>][slide_image_id]' value='<?php echo isset ( $slide["slide_image_id"] ) ? $slide["slide_image_id"] : ''; ?>'>
+                  <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_three][slides][slide_<?php echo $counter; ?>][slide_image_id]' value='<?php echo $slide["slide_image_id"]; ?>'>
                   <div class="image-preview-container">
                     <span class="image-controls remove-image-button">X</span>
                     <span class="image-controls edit-image-button">E</span>
@@ -195,10 +195,10 @@
                   <input type='button' class='image_upload_button button <?php echo ( !empty( $slide["slide_image_id"] ) ) ? "hidden" : ""; ?>' value='upload image'>
                 </td>
                 <td>
-                  <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_three][slide_<?php echo $counter; ?>][slide_title]' class='regular-text' value='<?php echo isset ( $slide['slide_title'] ) ? $slide['slide_title'] : ''; ?>'>
+                  <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_three][slides][slide_<?php echo $counter; ?>][slide_title]' class='regular-text' value='<?php echo isset ( $slide['slide_title'] ) ? $slide['slide_title'] : ''; ?>'>
                 </td>
                 <td>
-                  <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_three][slide_<?php echo $counter; ?>][slide_link]' class='regular-text' value='<?php echo isset( $slide['slide_link'] ) ? $slide['slide_link'] : ''; ?>'>
+                  <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_three][slides][slide_<?php echo $counter; ?>][slide_link]' class='regular-text' value='<?php echo isset( $slide['slide_link'] ) ? $slide['slide_link'] : ''; ?>'>
                 </td>
                 <td>
                   <a class="remove-slide-link" href="#">Remove Slide</a>
@@ -241,7 +241,7 @@
         <?php foreach ( $slider_four_slides as $slide ) : ?>
               <tr class='slide' colspan="3">
                 <td>
-                  <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_four][slides][slide_<?php echo $counter; ?>][slide_image_id]' value='<?php echo isset ( $slide["slide_image_id"] ) ? $slide["slide_image_id"] : ''; ?>'>
+                  <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_four][slides][slide_<?php echo $counter; ?>][slide_image_id]' value='<?php echo $slide["slide_image_id"]; ?>'>
                   <div class="image-preview-container">
                     <span class="image-controls remove-image-button">X</span>
                     <span class="image-controls edit-image-button">E</span>
@@ -250,10 +250,10 @@
                   <input type='button' class='image_upload_button button <?php echo ( !empty( $slide["slide_image_id"] ) ) ? "hidden" : ""; ?>' value='upload image'>
                 </td>
                 <td>
-                  <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_four][slide_<?php echo $counter; ?>][slide_title]' class='regular-text' value='<?php echo isset ( $slide['slide_title'] ) ? $slide['slide_title'] : ''; ?>'>
+                  <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_four][slides][slide_<?php echo $counter; ?>][slide_title]' class='regular-text' value='<?php echo isset ( $slide['slide_title'] ) ? $slide['slide_title'] : ''; ?>'>
                 </td>
                 <td>
-                  <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_four][slide_<?php echo $counter; ?>][slide_link]' class='regular-text' value='<?php echo isset( $slide['slide_link'] ) ? $slide['slide_link'] : ''; ?>'>
+                  <input type='text' name='<?php echo $this->plugin_name; ?>-settings[slider_four][slides][slide_<?php echo $counter; ?>][slide_link]' class='regular-text' value='<?php echo isset( $slide['slide_link'] ) ? $slide['slide_link'] : ''; ?>'>
                 </td>
                 <td>
                   <a class="remove-slide-link" href="#">Remove Slide</a>
