@@ -12,11 +12,11 @@
     display: none;
   }
 
- .slider {
+ .slider-container {
    display: none;
  }
 
- .slider_one {
+ .slider-container.slider_one_container {
    display: block;
  }
 
@@ -25,3 +25,35 @@
    max-height: 200px;
    overflow: hidden;
  }
+
+a, a:focus {
+  outline: none;
+}
+
+.image-controls {
+  display: none;
+  position: absolute;
+  color: #333333;
+  background: #ffffff;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.remove-image-button {
+  top: 10px;
+  left: 10px;
+}
+
+.edit-image-button {
+  top: 10px;
+  left: 30px;
+}
+
+.image-preview-container {
+  position: relative;
+}
+
+.image-preview-container:hover .image-controls {
+  display: block;
+}

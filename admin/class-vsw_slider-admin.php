@@ -160,15 +160,27 @@ class Vsw_slider_Admin {
   }
 
   public function generate_custom_slide_inputs() {
-
     $plugin_settings = $this->plugin_name . '-settings';
     $options = get_option( $plugin_settings );
-
   }
 
-  public function save_slide_data_callback() {
+  public function render_sliders() {
+    $sliders = get_option( $this->plugin_name . '-settings' );
 
-    update_option( $this->plugin_name . '-settings', $form_data );
+    echo '<div class="vsw_slider">';
+      foreach( $sliders as $slider => $slider_info ) {
+        var_dump($slider_info["slides"]);
+        foreach( $slider_info['slides'] as $slide ) {
+        echo '<div class="vsw_slide">';
+          echo '<img src="' . wp_get_attachment_image_url( $slide["slide_image_id"], "full") . '" alt="">';
+          echo '<p>' . !empty( $slide["slide_title"] ) ? _e( $slide["slide_title"] ) : '' . '</p>';
+        echo '</div>';
+      }
+    }
+    echo '</div>';
+  }
 
+  public function register_shortcodes() {
+    add_shortcode( 'vsw_slider_wall', array( $this, 'render_sliders' ) );
   }
 }

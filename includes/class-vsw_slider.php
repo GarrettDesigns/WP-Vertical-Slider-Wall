@@ -158,6 +158,7 @@ class Vsw_slider {
     $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_admin_menu_page' );
     $this->loader->add_action( 'admin_init', $plugin_admin, 'vsw_settings_init' );
     $this->loader->add_action( 'wp_ajax_save_slide_data', $plugin_admin, 'save_slide_data_callback' );
+    $this->loader->add_action( 'init', $plugin_admin, 'register_shortcodes' );
 
 	}
 
