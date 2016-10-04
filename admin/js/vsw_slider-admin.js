@@ -112,12 +112,12 @@
 
   function addSlideImage() {
 
-    var slide = $('.slide');
+    var slide = $('.slide, .slider-info');
 
     slide.on( 'click', '.image_upload_button, .edit-image-button', function( event ){
 
       var thisButton = $(this),
-          currentSlide = thisButton.parents('.slide');
+          currentSlide = thisButton.parents('.slide, .slider-info');
 
       event.preventDefault();
 

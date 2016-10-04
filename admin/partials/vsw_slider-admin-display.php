@@ -35,6 +35,17 @@
 
 <h1><?php echo $this->settings_title; ?> Settings</h1>
 
+
+  <form method='post' action='options.php'>
+<table class="form-table">
+  <tr>
+    <td>
+      <label for="<?php echo $this->plugin_name . '-settings'; ?>[slides_to_show]">Slides to Show</label>
+      <input type="text" name="<?php echo $this->plugin_name . '-settings'; ?>[slides_to_show]" value="<?php echo isset( $options['slides_to_show'] ) ? $options['slides_to_show'] : 1;  ?>">
+    </td  >
+  </tr>
+</table>
+
 <h2 class="nav-tab-wrapper">
 	<a href="#" class="nav-tab nav-tab-active">Slider One</a>
 	<a href="#" class="nav-tab">Slider Two</a>
@@ -42,17 +53,54 @@
 	<a href="#" class="nav-tab">Slider Four</a>
 </h2>
 
-  <form method='post' action='options.php'>
     <?php settings_fields( $this->plugin_name . '-settings' ); ?>
     <?php do_settings_sections( $this->plugin_name . '-settings' ); ?>
     <div class="slider-container slider_one_container">
     <table class="widefat">
-      <tr class="slider-info">
+      <thead>
+        <tr class="row-title">
+          <th>
+            Main Slider Display Image
+          </th>
+          <th class="row-title">
+            Slider Title
+          </th>
+          <th class="row-title">
+            Slider Title Link
+          </th>
+          <th class="row-title">
+            Slider Description
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="slider-info">
+          <td>
+            <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_one][slider_main_image_id]' value='<?php echo isset ( $slider_one_options["slider_main_image_id"] ) ? $slider_one_options["slider_main_image_id"] : ''; ?>'>
+            <div class="image-preview-container">
+              <span class="image-controls remove-image-button">X</span>
+              <span class="image-controls edit-image-button">E</span>
+              <img class='slide_image_preview' src='<?php echo isset( $slider_one_options['slider_main_image_id'] ) ? wp_get_attachment_image_url( $slider_one_options['slider_main_image_id'], 'thumbnail' ) : ''; ?>'>
+            </div>
+              <input type='button' class='image_upload_button button <?php echo ( !empty( $slider_one_options["slider_main_image_id"] ) ) ? "hidden" : ""; ?>' value='upload image'>
+          </td>
+          <td>
+            <input type="text" name="<?php echo $this->plugin_name . '-settings'; ?>[slider_one][slider_title]" value="<?php echo isset( $slider_one_options["slider_title"] ) ? $slider_one_options["slider_title"] : '';  ?>">
+          </td>
+          <td>
+            <input type="text" name="<?php echo $this->plugin_name . '-settings'; ?>[slider_one][slider_title_link]" value="<?php echo isset( $slider_one_options["slider_title_link"] ) ? $slider_one_options["slider_title_link"] : '';  ?>">
+          </td>
+          <td>
+            <textarea name="<?php echo $this->plugin_name . '-settings'; ?>[slider_one][slider_description]" rows="8" cols="40"><?php echo isset( $slider_one_options["slider_description"] ) ? $slider_one_options["slider_description"] : ''; ?></textarea>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <?php submit_button(); ?>
+    <table class="form-table">
+      <tr>
         <td>
-          <input type="text" name="<?php echo $this->plugin_name . '-settings'; ?>[slider_one][slider_title]" value="<?php echo isset( $slider_one_options["slider_title"] ) ? $slider_one_options["slider_title"] : '';  ?>">
-        </td>
-        <td>
-          <textarea name="<?php echo $this->plugin_name . '-settings'; ?>[slider_one][slider_description]" rows="8" cols="40"><?php echo isset( $slider_one_options["slider_description"] ) ? $slider_one_options["slider_description"] : ''; ?></textarea>
+          <h4>Slides</h4>
         </td>
       </tr>
     </table>
@@ -102,12 +150,50 @@
     </div>
     <div class="slider-container slider_two_container">
     <table class="widefat">
+    <thead>
+      <tr>
+        <th>
+          Slider Image Preview
+        </th>
+        <th>
+          Slider Title
+        </th>
+        <th>
+          Slider Title Link
+        </th>
+        <th>
+          Slider Description
+        </th>
+      </tr>
+    </thead>
+    <tbody>
       <tr class="slider-info">
+        <td>
+          <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_two][slider_main_image_id]' value='<?php echo isset ( $slider_two_options["slider_main_image_id"] ) ? $slider_two_options["slider_main_image_id"] : ''; ?>'>
+          <div class="image-preview-container">
+            <span class="image-controls remove-image-button">X</span>
+            <span class="image-controls edit-image-button">E</span>
+            <img class='slide_image_preview' src='<?php echo isset( $slider_two_options['slider_main_image_id'] ) ? wp_get_attachment_image_url( $slider_two_options['slider_main_image_id'], 'thumbnail' ) : ''; ?>'>
+          </div>
+            <input type='button' class='image_upload_button button <?php echo ( !empty( $slider_two_options["slider_main_image_id"] ) ) ? "hidden" : ""; ?>' value='upload image'>
+        </td>
         <td>
           <input type="text" name="<?php echo $this->plugin_name . '-settings'; ?>[slider_two][slider_title]" value="<?php echo isset( $slider_two_options["slider_title"] ) ? $slider_two_options["slider_title"] : '';  ?>">
         </td>
         <td>
+          <input type="text" name="<?php echo $this->plugin_name . '-settings'; ?>[slider_two][slider_title_link]" value="<?php echo isset( $slider_two_options["slider_title_link"] ) ? $slider_two_options["slider_title_link"] : '';  ?>">
+        </td>
+        <td>
           <textarea name="<?php echo $this->plugin_name . '-settings'; ?>[slider_two][slider_description]" rows="8" cols="40"><?php echo isset( $slider_two_options["slider_description"] ) ? $slider_two_options["slider_description"] : ''; ?></textarea>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+    <?php submit_button(); ?>
+    <table class="form-table">
+      <tr>
+        <td>
+          <h4>Slides</h4>
         </td>
       </tr>
     </table>
@@ -157,12 +243,50 @@
 </div>
       <div class="slider-container slider_three_container">
       <table class="widefat">
+    <thead>
+      <tr>
+        <th>
+          Slider Image Preview
+        </th>
+        <th>
+          Slider Title
+        </th>
+        <th>
+          Slider Title Link
+        </th>
+        <th>
+          Slider Description
+        </th>
+      </tr>
+    </thead>
+    <tbody>
       <tr class="slider-info">
+        <td>
+          <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_three][slider_main_image_id]' value='<?php echo isset ( $slider_three_options["slider_main_image_id"] ) ? $slider_three_options["slider_main_image_id"] : ''; ?>'>
+          <div class="image-preview-container">
+            <span class="image-controls remove-image-button">X</span>
+            <span class="image-controls edit-image-button">E</span>
+            <img class='slide_image_preview' src='<?php echo isset( $slider_three_options['slider_main_image_id'] ) ? wp_get_attachment_image_url( $slider_three_options['slider_main_image_id'], 'thumbnail' ) : ''; ?>'>
+          </div>
+            <input type='button' class='image_upload_button button <?php echo ( !empty( $slider_three_options["slider_main_image_id"] ) ) ? "hidden" : ""; ?>' value='upload image'>
+        </td>
         <td>
           <input type="text" name="<?php echo $this->plugin_name . '-settings'; ?>[slider_three][slider_title]" value="<?php echo isset( $slider_three_options["slider_title"] ) ? $slider_three_options["slider_title"] : '';  ?>">
         </td>
         <td>
+          <input type="text" name="<?php echo $this->plugin_name . '-settings'; ?>[slider_three][slider_title_link]" value="<?php echo isset( $slider_three_options["slider_title_link"] ) ? $slider_three_options["slider_title_link"] : '';  ?>">
+        </td>
+        <td>
           <textarea name="<?php echo $this->plugin_name . '-settings'; ?>[slider_three][slider_description]" rows="8" cols="40"><?php echo isset( $slider_three_options["slider_description"] ) ? $slider_three_options["slider_description"] : ''; ?></textarea>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+    <?php submit_button(); ?>
+    <table class="form-table">
+      <tr>
+        <td>
+          <h4>Slides</h4>
         </td>
       </tr>
     </table>
@@ -212,12 +336,50 @@
   </div>
   <div class="slider-container slider_four_container">
   <table class="widefat">
+    <thead>
+      <tr>
+        <th>
+          Slider Image Preview
+        </th>
+        <th>
+          Slider Title
+        </th>
+        <th>
+          Slider Title Link
+        </th>
+        <th>
+          Slider Description
+        </th>
+      </tr>
+    </thead>
+    <tbody>
       <tr class="slider-info">
+        <td>
+          <input type='hidden' class="image_upload_id" name='<?php echo $this->plugin_name; ?>-settings[slider_four][slider_main_image_id]' value='<?php echo isset ( $slider_four_options["slider_main_image_id"] ) ? $slider_four_options["slider_main_image_id"] : ''; ?>'>
+          <div class="image-preview-container">
+            <span class="image-controls remove-image-button">X</span>
+            <span class="image-controls edit-image-button">E</span>
+            <img class='slide_image_preview' src='<?php echo isset( $slider_four_options['slider_main_image_id'] ) ? wp_get_attachment_image_url( $slider_four_options['slider_main_image_id'], 'thumbnail' ) : ''; ?>'>
+          </div>
+            <input type='button' class='image_upload_button button <?php echo ( !empty( $slider_four_options["slider_main_image_id"] ) ) ? "hidden" : ""; ?>' value='upload image'>
+        </td>
         <td>
           <input type="text" name="<?php echo $this->plugin_name . '-settings'; ?>[slider_four][slider_title]" value="<?php echo isset( $slider_four_options["slider_title"] ) ? $slider_four_options["slider_title"] : '';  ?>">
         </td>
         <td>
+          <input type="text" name="<?php echo $this->plugin_name . '-settings'; ?>[slider_four][slider_title_link]" value="<?php echo isset( $slider_four_options["slider_title_link"] ) ? $slider_four_options["slider_title_link"] : '';  ?>">
+        </td>
+        <td>
           <textarea name="<?php echo $this->plugin_name . '-settings'; ?>[slider_four][slider_description]" rows="8" cols="40"><?php echo isset( $slider_four_options["slider_description"] ) ? $slider_four_options["slider_description"] : ''; ?></textarea>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+    <?php submit_button(); ?>
+    <table class="form-table">
+      <tr>
+        <td>
+          <h4>Slides</h4>
         </td>
       </tr>
     </table>

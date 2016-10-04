@@ -2,3 +2,11 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+  @import 'slick.css';
+  @import 'slick-theme.css';
+
+ .slick_slider {
+   width: 25%;
+   float: left;
+ }

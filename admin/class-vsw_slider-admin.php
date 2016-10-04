@@ -140,14 +140,14 @@ class Vsw_slider_Admin {
 
     add_settings_section(
       'vsw_slider_one_settings_section',
-      'These are the settings for slider one',
+      'These are the settings for this slider',
       array( $this, 'slider_one_settings_section_callback' ),
       $plugin_settings
     );
 
     add_settings_field(
       'slide_image_upload',
-      'Slide Data',
+      'Slider Data',
       array( $this, 'generate_custom_slide_inputs' ),
       $plugin_settings,
       'vsw_slider_one_settings_section',
@@ -156,7 +156,7 @@ class Vsw_slider_Admin {
   }
 
   public function slider_one_settings_section_callback() {
-    echo '<p>Using the input below you may assign an image, title, and link for each slide in this slider</p>';
+    echo '<p>Using the input below you may assign an image, title, and link for each slide in this slider <br> As well as input a main image, title and link for each slider group</p>';
   }
 
   public function generate_custom_slide_inputs() {
@@ -172,13 +172,25 @@ class Vsw_slider_Admin {
     $slider_three = $sliders['slider_three'];
     $slider_four = $sliders['slider_four'];
 
-    self::render_single_slider( $slider_one );
-    self::render_single_slider( $slider_two );
-    self::render_single_slider( $slider_three );
-    self::render_single_slider( $slider_four );
+    self::render_single_slider( $slider_one, $sliders );
+    self::render_single_slider( $slider_two, $sliders );
+    self::render_single_slider( $slider_three, $sliders );
+    self::render_single_slider( $slider_four, $sliders );
   }
 
-  public function render_single_slider( $slider ) {
+  public function render_single_slider( $slider, $sliders ) {
+    ?>
+    <script type="text/javascript">
+      jQuery(document).ready(function() {
+        jQuery('.vsw_slider').slick({
+          'dots': false,
+          'verticalSwiping': true,
+          'vertical': true,
+          'slidesToShow': <?php echo $sliders['slides_to_show'] ? $sliders['slides_to_show'] : 1; ?>
+        });
+      });
+    </script>
+    <?php
     echo '<div class="vsw_slider">';
       foreach( $slider['slides'] as $slide ) {
         $html = '';
