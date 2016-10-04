@@ -47,6 +47,12 @@
           counter++;
         });
 
+        jQuery('.col').hover(function() {
+          jQuery(this).removeClass('no-hover').addClass('hover');
+        }, function() {
+          jQuery('.col').addClass('no-hover').removeClass('hover');
+        });
+
         jQuery('.vsw_slider').slick({
           'dots': false,
           'verticalSwiping': true,

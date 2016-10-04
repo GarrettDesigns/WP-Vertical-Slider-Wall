@@ -156,7 +156,7 @@ class Vsw_slider_Admin {
   }
 
   public function slider_one_settings_section_callback() {
-    echo '<p>Using the input below you may assign an image, title, and link for each slide in this slider <br> As well as input a main image, title and link for each slider group</p>';
+    echo '<p>Using the input below you may assign an image, title, and link for each slide in this slider <br> As well as input a main image, title and link for each slider group</p><p>Use the shortcode <b>[vsw_slider_wall]</b> to output your sliders.</p>';
   }
 
   public function generate_custom_slide_inputs() {
@@ -184,7 +184,9 @@ class Vsw_slider_Admin {
 
     $slider_title = $slider['slider_title'];
     $slider_title_link = $slider['slider_title_link'];
+    $slider_description = $slider['slider_description'];
     $slider_main_image = wp_get_attachment_image_url( $slider['slider_main_image_id'], 'full' );
+    $slides = isset( $slider['slides'] ) ? $slider['slides'] : array();
 
     $html = '';
 
@@ -193,8 +195,9 @@ class Vsw_slider_Admin {
         $html .= '<div class="responsive">';
           $html .= '<a href="' . $slider_title_link . '"><img src="' . $slider_main_image . '"></a>';
         $html .= '</div>';
+        $html .= '<p class="slider-description">' . $slider_description . '</p>';
         $html .= '<div class="vsw_slider">';
-        foreach( $slider['slides'] as $slide ) {
+        foreach( $slides as $slide ) {
           // Set up variables for outputting slider values
           $slide_link = $slide["slide_link"];
           $slide_url = wp_get_attachment_image_url( $slide["slide_image_id"], "full");

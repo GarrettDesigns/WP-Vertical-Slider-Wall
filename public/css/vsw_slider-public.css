@@ -61,11 +61,11 @@
   max-width: 100%;
 }
 
-.slider-title, .responsive {
+.slider-title, .responsive, .slider-description {
   display: none;
 }
 
-@media screen and (max-width: 675px) {
+@media screen and (max-width: 1024px) {
   .col {
     float: none;
     width: 100%;
@@ -73,11 +73,15 @@
   .vsw_slider {
     display: none;
   }
-  .slider-title, .responsive {
+  .slider-title, .responsive, .slider-description {
     display: block;
   }
   .slider-title {
     text-align: center;
     padding: 30px 0;
   }
+}
+
+.slider-description {
+  margin: 30px 0;
 }

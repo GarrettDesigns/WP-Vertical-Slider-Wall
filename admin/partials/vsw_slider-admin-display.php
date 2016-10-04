@@ -96,7 +96,6 @@
         </tr>
       </tbody>
     </table>
-    <?php submit_button(); ?>
     <table class="form-table">
       <tr>
         <td>
@@ -153,7 +152,7 @@
     <thead>
       <tr>
         <th>
-          Slider Image Preview
+            Main Slider Display Image
         </th>
         <th>
           Slider Title
@@ -189,7 +188,6 @@
       </tr>
     </tbody>
     </table>
-    <?php submit_button(); ?>
     <table class="form-table">
       <tr>
         <td>
@@ -246,7 +244,7 @@
     <thead>
       <tr>
         <th>
-          Slider Image Preview
+          Main Slider Display Image
         </th>
         <th>
           Slider Title
@@ -282,7 +280,6 @@
       </tr>
     </tbody>
     </table>
-    <?php submit_button(); ?>
     <table class="form-table">
       <tr>
         <td>
@@ -339,7 +336,7 @@
     <thead>
       <tr>
         <th>
-          Slider Image Preview
+          Main Slider Display Image
         </th>
         <th>
           Slider Title
@@ -375,7 +372,6 @@
       </tr>
     </tbody>
     </table>
-    <?php submit_button(); ?>
     <table class="form-table">
       <tr>
         <td>
