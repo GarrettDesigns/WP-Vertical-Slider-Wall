@@ -36,7 +36,7 @@
 <h1><?php echo $this->settings_title; ?> Settings</h1>
 
 
-  <form method='post' action='options.php'>
+<form method='post' action='options.php'>
 <table class="form-table">
   <tr>
     <td>

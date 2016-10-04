@@ -29,8 +29,32 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
-   $( window ).load(function() {
-    $('.vsw_slider').slick();
-  });
+      jQuery(document).ready(function() {
+        var counter = 1;
+
+        jQuery(window).resize(function() {
+          jQuery('.vsw_slider').slick('resize');
+          jQuery('.vsw_slider').slick('reInit');
+        });
+
+        jQuery(window).on('orientationchange', function() {
+          jQuery('.vsw_slider').slick('resize');
+          jQuery('.vsw_slider').slick('reInit');
+        });
+
+        jQuery('.col').each(function() {
+          jQuery(this).addClass('col' + counter);
+          counter++;
+        });
+
+        jQuery('.vsw_slider').slick({
+          'dots': false,
+          'verticalSwiping': true,
+          'vertical': true,
+          'slidesToShow': slider_settings.slides_to_show,
+          'prevArrow': '<span class="vsw_prev_arrow"></span>',
+          'nextArrow': '<span class="vsw_next_arrow"></span>'
+        });
+      });
 
 })( jQuery );

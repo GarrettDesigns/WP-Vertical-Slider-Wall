@@ -51,7 +51,10 @@ class Vsw_slider_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+    $options = get_option( $this->plugin_name . '-settings');
+    $slides_to_show = $options["slides_to_show"];
 
+    $this->slides_to_show = $slides_to_show;
 	}
 
 	/**
@@ -72,9 +75,6 @@ class Vsw_slider_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/slick.css', array(), $this->version, 'all' );
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/slick-theme.css', array(), $this->version, 'all' );
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/vsw_slider-public.css', array(), $this->version, 'all' );
 
 	}
@@ -98,9 +98,10 @@ class Vsw_slider_Public {
 		 * class.
 		 */
 
-    wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/slick.min.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/vsw_slider-public.js', array( 'jquery' ), $this->version, false );
+    wp_enqueue_script( 'slick', plugin_dir_url( __FILE__ ) . 'js/slick.min.js', array( 'jquery' ), $this->version, false );
 
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/vsw_slider-public.js', array( 'jquery' ), $this->version, false );
+    wp_localize_script( $this->plugin_name, 'slider_settings', array( 'slides_to_show' => $this->slides_to_show ) );
 	}
 
 }

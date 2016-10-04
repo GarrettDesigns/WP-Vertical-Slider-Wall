@@ -172,37 +172,44 @@ class Vsw_slider_Admin {
     $slider_three = $sliders['slider_three'];
     $slider_four = $sliders['slider_four'];
 
-    self::render_single_slider( $slider_one, $sliders );
-    self::render_single_slider( $slider_two, $sliders );
-    self::render_single_slider( $slider_three, $sliders );
-    self::render_single_slider( $slider_four, $sliders );
+    echo '<div id="vsw_slider">';
+      self::render_single_slider( $slider_one, $sliders );
+      self::render_single_slider( $slider_two, $sliders );
+      self::render_single_slider( $slider_three, $sliders );
+      self::render_single_slider( $slider_four, $sliders );
+    echo '</div>';
   }
 
   public function render_single_slider( $slider, $sliders ) {
-    ?>
-    <script type="text/javascript">
-      jQuery(document).ready(function() {
-        jQuery('.vsw_slider').slick({
-          'dots': false,
-          'verticalSwiping': true,
-          'vertical': true,
-          'slidesToShow': <?php echo $sliders['slides_to_show'] ? $sliders['slides_to_show'] : 1; ?>
-        });
-      });
-    </script>
-    <?php
-    echo '<div class="vsw_slider">';
-      foreach( $slider['slides'] as $slide ) {
-        $html = '';
 
-        $html .= '<div class="vsw_slide">';
-        $html .= '<a href="' . $slide["slide_link"] . '"><img src="' . wp_get_attachment_image_url( $slide["slide_image_id"], "full") . '" alt=""></a>';
-        $html .= '<p>' . isset( $slide["slide_title"] ) ?  $slide["slide_title"] : "" . '</p>';
+    $slider_title = $slider['slider_title'];
+    $slider_title_link = $slider['slider_title_link'];
+    $slider_main_image = wp_get_attachment_image_url( $slider['slider_main_image_id'], 'full' );
+
+    $html = '';
+
+      $html .= '<div class="col no-hover">';
+        $html .= '<h2 class="slider-title"><a href="' . $slider_title_link . '">' . $slider_title . '</a></h2>';
+        $html .= '<div class="responsive">';
+          $html .= '<a href="' . $slider_title_link . '"><img src="' . $slider_main_image . '"></a>';
         $html .= '</div>';
+        $html .= '<div class="vsw_slider">';
+        foreach( $slider['slides'] as $slide ) {
+          // Set up variables for outputting slider values
+          $slide_link = $slide["slide_link"];
+          $slide_url = wp_get_attachment_image_url( $slide["slide_image_id"], "full");
+          $slide_title = isset( $slide["slide_title"] ) && !empty( $slide["slide_title"] ) ? $slide["slide_title"] : "";
 
-        echo $html;
-      }
-    echo '</div>';
+          // Output slider markup with dynamic values
+            $html .= '<div class="vsw_slide">';
+              $html .= '<a href="' . $slide_link  . '"><img src="' . $slide_url . '" alt="vertical slider image"></a>';
+              $html .= '<span class="slide-title">' . $slide_title . '</span>';
+            $html .= '</div>';
+        }
+        $html .= '</div>';
+      $html .= '</div>';
+
+    echo $html;
   }
 
   public function register_shortcodes() {
